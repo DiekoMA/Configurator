@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Configurator.MainWindow"
+        xmlns:viewModels="clr-namespace:Configurator"
+        d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+        x:DataType="viewModels:MainWindowViewModel"
+        WindowState="Normal"
+        Name="Window"
+        Width="450"
+        PointerPressed="InputElement_OnPointerPressed"
+        CanResize="False"
+        SystemDecorations="Full"
+        WindowStartupLocation="CenterScreen"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="PreferSystemChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        Title="Configurator">
+        
+        <NativeMenu.Menu>
+                <NativeMenu>
+                        <NativeMenuItem Header="File"/>
+                </NativeMenu>
+        </NativeMenu.Menu>
+        <Grid RowDefinitions="Auto,Auto,5">
+        <DockPanel  Grid.Row="0" >
+            <Grid Name="MainGrid" Background="Transparent" DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto">
+                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">Configurator</TextBlock>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <StackPanel.Styles>
+                        <Style Selector="Button">
+                            <Setter Property="Margin" Value="2"/>
+                        </Style>
+                    </StackPanel.Styles>
+                    <Button Name="SettingsButton">[ ]</Button>
+                    <Button Name="CloseButton">X</Button>
+                </StackPanel>
+            </Grid>
+            
+        </DockPanel>
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <ComboBox/>
+                    <Button Content="Start"/>
+                </StackPanel>
+                
+                <ListBox ItemsSource="{Binding Packages}"/>
+            </StackPanel>
+    </Grid>
+</Window>
