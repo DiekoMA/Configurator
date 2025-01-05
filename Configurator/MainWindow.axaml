@@ -9,44 +9,50 @@
         x:DataType="viewModels:MainWindowViewModel"
         WindowState="Normal"
         Name="Window"
-        Width="450"
+        Width="700"
         PointerPressed="InputElement_OnPointerPressed"
         CanResize="False"
         SystemDecorations="Full"
         WindowStartupLocation="CenterScreen"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="PreferSystemChrome"
-        ExtendClientAreaTitleBarHeightHint="-1"
         Title="Configurator">
-        
-        <NativeMenu.Menu>
-                <NativeMenu>
-                        <NativeMenuItem Header="File"/>
-                </NativeMenu>
-        </NativeMenu.Menu>
-        <Grid RowDefinitions="Auto,Auto,5">
-        <DockPanel  Grid.Row="0" >
-            <Grid Name="MainGrid" Background="Transparent" DockPanel.Dock="Top" ColumnDefinitions="Auto,*,Auto">
-                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">Configurator</TextBlock>
-                <StackPanel Grid.Column="2" Orientation="Horizontal">
-                    <StackPanel.Styles>
-                        <Style Selector="Button">
-                            <Setter Property="Margin" Value="2"/>
-                        </Style>
-                    </StackPanel.Styles>
-                    <Button Name="SettingsButton">[ ]</Button>
-                    <Button Name="CloseButton">X</Button>
-                </StackPanel>
-            </Grid>
-            
-        </DockPanel>
-            <StackPanel Grid.Row="1">
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <ComboBox/>
-                    <Button Content="Start"/>
-                </StackPanel>
-                
-                <ListBox ItemsSource="{Binding Packages}"/>
+
+        <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, *">
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="5">
+                <Button Content="Load Config"/>
+                <Button Content="Export Config"/>
+                <Button Content="Restore"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
+                <ScrollViewer>
+                    <ListBox SelectedItem="{Binding SelectedApplication}" ItemsSource="{Binding Packages}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Grid.Column="1">
+                                    <StackPanel.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Exclude"/>
+                                            <MenuItem Header="Exclude"/>
+                                            <MenuItem Header="Exclude"/>
+                                            <MenuItem Header="Exclude"/>
+                                        </ContextMenu>
+                                    </StackPanel.ContextMenu>
+                                    <TextBlock Text="{Binding DisplayName}"/>
+                                    <TextBlock Text="{Binding Publisher}"/>
+                                    <TextBlock Text="{Binding InstalLocation}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="5">
+                <TextBlock Text="{Binding SelectedApplication.DisplayName}" Margin="5,5,5,5"/>
+                <TextBlock Text="Config Settings"/>
+                <TextBox Margin="5">Hello</TextBox>
+                <TextBox Margin="5">Hello</TextBox>
+                <TextBox Margin="5">Hello</TextBox>
+                <TextBox Margin="5">Hello</TextBox>
+                <TextBox Margin="5">Hello</TextBox>
             </StackPanel>
     </Grid>
 </Window>
