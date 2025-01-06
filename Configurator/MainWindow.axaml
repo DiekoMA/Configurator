@@ -19,53 +19,62 @@
     WindowState="Normal"
     mc:Ignorable="d">
 
-    <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, *">
-        <StackPanel
+    <Window.Styles>
+        <Style Selector="TextBlock.header">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+
+        <Style Selector="TextBlock.marginTop, TextBox.marginTop">
+            <Setter Property="Margin" Value="0 10 0 0" />
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="* *" RowDefinitions="* Auto">
+        <ListBox
             Grid.Row="0"
             Grid.Column="0"
-            Margin="5"
-            Orientation="Horizontal">
-            <Button Content="Load Config" />
-            <Button Content="Export Config" />
-            <Button Content="Restore" />
-        </StackPanel>
-        <StackPanel
+            ItemsSource="{Binding Packages}"
+            SelectedItem="{Binding SelectedApplication}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox />
+                        <StackPanel>
+                            <TextBlock Text="{Binding DisplayName}" />
+                            <TextBlock Text="{Binding Publisher}" />
+                            <TextBlock Text="{Binding InstallLocation}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid
             Grid.Row="1"
             Grid.Column="0"
-            Margin="5">
-            <ScrollViewer>
-                <ListBox ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedApplication}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <StackPanel.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Exclude" />
-                                        <MenuItem Header="Exclude" />
-                                        <MenuItem Header="Exclude" />
-                                        <MenuItem Header="Exclude" />
-                                    </ContextMenu>
-                                </StackPanel.ContextMenu>
-                                <TextBlock Text="{Binding DisplayName}" />
-                                <TextBlock Text="{Binding Publisher}" />
-                                <TextBlock Text="{Binding InstallLocation}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </ScrollViewer>
-        </StackPanel>
+            Margin="12"
+            ColumnDefinitions="* Auto Auto">
+            <Button
+                Grid.Column="1"
+                Margin="0 0 10 0"
+                Content="Import" />
+            <Button Grid.Column="2" Content="Export" />
+        </Grid>
+
         <StackPanel
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
             Grid.Column="1"
-            Margin="5">
-            <TextBlock Margin="5 5 5 5" Text="{Binding SelectedApplication.DisplayName}" />
-            <TextBlock Text="Config Settings" />
-            <TextBox Margin="5">Hello</TextBox>
-            <TextBox Margin="5">Hello</TextBox>
-            <TextBox Margin="5">Hello</TextBox>
-            <TextBox Margin="5">Hello</TextBox>
-            <TextBox Margin="5">Hello</TextBox>
+            Margin="12"
+            IsVisible="{Binding !!SelectedApplication}">
+            <TextBlock Classes="header" Text="{Binding SelectedApplication.DisplayName}" />
+            <TextBlock Classes="marginTop" Text="Config Settings" />
+            <TextBox Classes="marginTop">Hello</TextBox>
+            <TextBox Classes="marginTop">Hello</TextBox>
+            <TextBox Classes="marginTop">Hello</TextBox>
+            <TextBox Classes="marginTop">Hello</TextBox>
+            <TextBox Classes="marginTop">Hello</TextBox>
         </StackPanel>
     </Grid>
 </Window>
