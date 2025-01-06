@@ -2,10 +2,10 @@
 
 namespace Configurator.Models;
 
-public class InstalledApplication
+public record InstalledApplication
 {
-    public string DisplayName { get; set; }
-    public Bitmap DisplayIcon { get; set; }
-    public string InstalLocation { get; set; }
-    public string Publisher { get; set; }
+    public required string DisplayName { get; set; }
+    public Bitmap? DisplayIcon { get; set; }
+    public required string InstallLocation { get; set; }
+    public required string Publisher { get; set; }
 }
